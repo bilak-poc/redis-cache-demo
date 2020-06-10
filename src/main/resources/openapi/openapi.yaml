@@ -1,0 +1,137 @@
+openapi: 3.0.2
+info:
+  version: "0.1.1"
+  title: "test"
+tags:
+  - name: "Imports"
+    description: ""
+paths:
+  
+  /imports:
+    post:
+      tags:
+        - "Imports"
+      summary: ""
+      description: ""
+      operationId: createImport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportRequest"
+      responses:
+        "201":
+          description: "successful operation"
+          headers:
+            Location:
+              $ref: "#/components/headers/LocationHeader"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Import"
+        "400":
+          description: "Invalid data supplied"
+          
+  /imports/{importId}:
+    parameters:
+      - $ref: "#/components/parameters/ImportIdPathParam"
+    get:
+      tags: 
+        - "Imports"
+      operationId: readImport
+      responses:
+        "200":
+          description: "TODO"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Import"
+        
+components:
+  schemas:
+    BusinessDate:
+      description: Import business date
+      type: string
+      format: date
+      example: 2020-06-01
+
+    ImportId:
+      type: string
+      format: uuid
+
+    Company:
+      description: Company details
+      properties:
+        name:
+          description: Name of the company
+          type: string
+          example: Lidl
+        location:
+          $ref: '#/components/schemas/CompanyLocation'
+
+    CompanyLocation:
+      description: Company's location details
+      properties:
+        name:
+          description: Name of business premises/location
+          type: string
+          example: Lidl Berlin
+
+    ImportRequest:
+      type: "object"
+      description: ""
+      properties:
+        metadata:
+          type: object
+          required:
+            - type
+            - version
+          properties:
+            businessDate:
+              $ref: '#/components/schemas/BusinessDate'
+            replaceId:
+              $ref: "#/components/schemas/ImportId"
+          
+    Import:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/ImportId"
+        businessDate:
+          $ref: '#/components/schemas/BusinessDate'
+        created:
+          type: string
+          format: date-time
+        status:
+          $ref: "#/components/schemas/ImportStatusEnum"
+        replaceId:
+          $ref: "#/components/schemas/ImportId"
+        company:
+          $ref: '#/components/schemas/Company'
+
+    ImportStatusEnum:
+      type: "string"
+      enum:
+        - "OPEN"
+        - "LOCKED"
+        - "REPLACED"
+
+  parameters:
+    ImportIdPathParam:
+      name: importId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/ImportId"
+  headers:
+    LocationHeader:
+      schema:
+        type: string
+
+
+    
+
+
+
+
