@@ -148,6 +148,7 @@
                             <apiPackage>${openapi-generator.package}.api</apiPackage>
                             <configOptions>
                                 <interfaceOnly>true</interfaceOnly>
+                                <serializableModel>true</serializableModel>
                             </configOptions>
                             <generatorName>spring</generatorName>
                             <invokerPackage>${openapi-generator.package}.handler</invokerPackage>
