@@ -22,7 +22,7 @@
         <spring-cloud.version>2.2.3.RELEASE</spring-cloud.version>
         <testcontainers.version>1.14.3</testcontainers.version>
 
-        <openapi-generator-maven-plugin.version>4.3.1</openapi-generator-maven-plugin.version>
+        <openapi-generator-maven-plugin.version>5.1.0</openapi-generator-maven-plugin.version>
         <openapi-generator.package>com.github.bilakpoc.rediscachedemo.generated</openapi-generator.package>
     </properties>
 
